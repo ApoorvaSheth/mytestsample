@@ -1,0 +1,5 @@
+<map id="on_cus_evt" name="on_cus_evt">
+<area shape="rect" id="node1" title="Callback function for custom switch service." alt="" coords="245,5,332,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a5b27b40e18af00d43b92f57eaed0e9b2" title="Function for initializing services that will be used by the application." alt="" coords="104,5,197,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

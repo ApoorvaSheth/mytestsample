@@ -1,0 +1,9 @@
+<map id="delete_bonds" name="delete_bonds">
+<area shape="rect" id="node1" title="Function for deleting bonds." alt="" coords="621,58,720,84"/>
+<area shape="rect" id="node2" href="$main_8c.html#a8b62a119d47b64c64f1352d118888fd3" title="Function to start advertising." alt="" coords="457,32,573,59"/>
+<area shape="rect" id="node6" href="$main_8c.html#a22ac6b4aa31eb37eb73d3f2a4983a121" title="Function for handling events from the BSP module." alt="" coords="280,83,409,110"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,32,56,59"/>
+<area shape="rect" id="node4" href="$main_8c.html#a3d7c0b9bfadfcd49fbefeaa55c6e7012" title="Event Handling function for peer manager." alt="" coords="289,32,401,59"/>
+<area shape="rect" id="node5" href="$main_8c.html#a6c69f32d7006096dc75ddf2d036a91d0" title="Function for initializing peer manager." alt="" coords="104,32,232,59"/>
+<area shape="rect" id="node7" href="$main_8c.html#ada967b353ba42e8061e8fdb343bf74e7" title="Function for initializing buttons and leds." alt="" coords="108,83,228,110"/>
+</map>

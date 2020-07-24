@@ -1,0 +1,10 @@
+<map id="sleep_mode_enter" name="sleep_mode_enter">
+<area shape="rect" id="node1" title="Function for putting the chip into sleep mode." alt="" coords="449,56,577,83"/>
+<area shape="rect" id="node2" href="$main_8c.html#a22ac6b4aa31eb37eb73d3f2a4983a121" title="Function for handling events from the BSP module." alt="" coords="272,5,401,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#a438975f6ac624c8570220ab1c842ba1e" title="Function for handling advertising events." alt="" coords="294,56,379,83"/>
+<area shape="rect" id="node7" href="$main_8c.html#a2e894d5ec31e8a0bf3c5a97dbdc7909a" title="Callback function for disconnection app_timer." alt="" coords="279,107,394,133"/>
+<area shape="rect" id="node3" href="$main_8c.html#ada967b353ba42e8061e8fdb343bf74e7" title="Function for initializing buttons and leds." alt="" coords="104,5,224,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,56,56,83"/>
+<area shape="rect" id="node6" href="$main_8c.html#a935c9624de0709fe228dbefa4b54de48" title="Function for initializing the Advertising functionality." alt="" coords="111,56,217,83"/>
+<area shape="rect" id="node8" href="$main_8c.html#a09658aaa0774820d8f25249d551bc283" title="Function for the Timer initialization." alt="" coords="123,107,205,133"/>
+</map>

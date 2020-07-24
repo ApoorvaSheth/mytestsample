@@ -1,0 +1,7 @@
+<map id="custom_meas_timeout_handler" name="custom_meas_timeout_handler">
+<area shape="rect" id="node1" title="Callback function for Notification app_timer." alt="" coords="5,64,160,105"/>
+<area shape="rect" id="node2" href="$main_8c.html#a8bb16472c3fff64faa89d16320bf9051" title="Command format to send to Blackbox." alt="" coords="208,71,348,98"/>
+<area shape="rect" id="node3" href="$ble__cus__p_8c.html#a16dafdebc2ef31ef53f2554bf75a23f7" title="Function for updating the custom value." alt="" coords="396,5,549,47"/>
+<area shape="rect" id="node4" href="$main_8c.html#ab2d79d012b56be0481ae5df5c0009a73" title="Read the input from TTP229 module." alt="" coords="422,71,523,98"/>
+<area shape="rect" id="node5" href="$main_8c.html#a14dac6bb8a1be2aba90efc22f71e6407" title="Reset the LED Timer." alt="" coords="417,122,528,149"/>
+</map>

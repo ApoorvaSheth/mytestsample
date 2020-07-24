@@ -1,0 +1,4 @@
+<map id="idle_state_handle" name="idle_state_handle">
+<area shape="rect" id="node1" title="Function for handling the idle state (main loop)." alt="" coords="104,5,227,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

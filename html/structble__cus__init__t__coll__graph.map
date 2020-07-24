@@ -1,0 +1,4 @@
+<map id="ble_cus_init_t" name="ble_cus_init_t">
+<area shape="rect" id="node1" title="custom Service init structure. This contains all options and data needed for initialization of the se..." alt="" coords="37,189,139,267"/>
+<area shape="rect" id="node2" href="$structble__cus__s.html" title="Custom Service structure. This contains various status information for the service." alt="" coords="5,5,171,127"/>
+</map>

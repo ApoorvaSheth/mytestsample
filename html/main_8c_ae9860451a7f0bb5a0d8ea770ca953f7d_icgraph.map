@@ -1,0 +1,6 @@
+<map id="on_match_request" name="on_match_request">
+<area shape="rect" id="node1" title="On match request." alt="" coords="413,5,543,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#af79fad11603ce86f991e529e023dc564" title="Function for handling BLE events." alt="" coords="255,5,365,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#aa06a7a39e83ec4cf3553f4ed6ba6323a" title="Function for initializing the BLE stack." alt="" coords="104,5,207,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="bsp_event_handler" name="bsp_event_handler">
+<area shape="rect" id="node1" title="Function for handling events from the BSP module." alt="" coords="272,5,401,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#ada967b353ba42e8061e8fdb343bf74e7" title="Function for initializing buttons and leds." alt="" coords="104,5,224,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

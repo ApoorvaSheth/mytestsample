@@ -1,0 +1,7 @@
+<map id="Read_keypad" name="Read_keypad">
+<area shape="rect" id="node1" title="Read the input from TTP229 module." alt="" coords="625,5,727,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a8bb16472c3fff64faa89d16320bf9051" title="Command format to send to Blackbox." alt="" coords="437,32,577,59"/>
+<area shape="rect" id="node4" href="$main_8c.html#a32bd14eb8abab2a4d10abce247ea4a69" title="Callback function for Notification app_timer." alt="" coords="235,29,389,70"/>
+<area shape="rect" id="node5" href="$main_8c.html#a09658aaa0774820d8f25249d551bc283" title="Function for the Timer initialization." alt="" coords="104,32,187,59"/>
+</map>

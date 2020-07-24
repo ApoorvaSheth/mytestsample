@@ -1,0 +1,248 @@
+.TH "custom_service/ble_cus_p.h" 3 "Fri Jul 24 2020" "BLE SWITCH (REMOTE) APPLICATION" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+custom_service/ble_cus_p.h \- This module implements a custom Button Service with an Button(Touch Switch) Characteristics\&. During initialization, the module adds the Custom Button Service and Characteristics to the BLE stack database\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'ble\&.h'\fP
+.br
+\fC#include 'ble_srv_common\&.h'\fP
+.br
+\fC#include 'nrf_ble_gatt\&.h'\fP
+.br
+\fC#include 'nrf_sdh_ble\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBble_cus_evt_t\fP"
+.br
+.RI "Custom Service event\&. "
+.ti -1c
+.RI "struct \fBble_cus_init_t\fP"
+.br
+.RI "custom Service init structure\&. This contains all options and data needed for initialization of the service\&. "
+.ti -1c
+.RI "struct \fBble_cus_s\fP"
+.br
+.RI "Custom Service structure\&. This contains various status information for the service\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBLE_CUS_DEF\fP(_name)"
+.br
+.RI "Macro for defining a ble_cus_service instance\&. "
+.ti -1c
+.RI "#define \fBCUSTOM_SERVICE_UUID_BASE\fP"
+.br
+.RI "CUSTOM_SERVICE_UUID: f364xxxx-b000-4042-ba50-05ca45bf8abc\&. "
+.ti -1c
+.RI "#define \fBCUSTOM_SERVICE_UUID\fP   0x1400"
+.br
+.ti -1c
+.RI "#define \fBCUSTOM_VALUE_CHAR_UUID\fP   0x1401"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBble_cus_s\fP \fBble_cus_t\fP"
+.br
+.RI "Forward declaration of the ble_cus_t type\&. "
+.ti -1c
+.RI "typedef void(* \fBble_cus_evt_handler_t\fP) (\fBble_cus_t\fP *p_bas, \fBble_cus_evt_t\fP *p_evt)"
+.br
+.RI "Custom Service event handler type\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBble_cus_evt_type_t\fP { \fBBLE_CUS_EVT_NOTIFICATION_ENABLED\fP, \fBBLE_CUS_EVT_NOTIFICATION_DISABLED\fP }"
+.br
+.RI "Custom Service event type\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fBble_cus_init\fP (\fBble_cus_t\fP *p_cus, const \fBble_cus_init_t\fP *p_cus_init)"
+.br
+.RI "Function for initializing the Custom Service\&. "
+.ti -1c
+.RI "void \fBble_cus_on_ble_evt\fP (ble_evt_t const *p_ble_evt, void *p_context)"
+.br
+.RI "Function for handling the Application's BLE Stack events\&. "
+.ti -1c
+.RI "void \fBble_cus_on_gatt_evt\fP (\fBble_cus_t\fP *p_cus, nrf_ble_gatt_evt_t const *p_gatt_evt)"
+.br
+.RI "Function for handling the GATT module's events\&. "
+.ti -1c
+.RI "ret_code_t \fBble_cus_custom_value_update\fP (\fBble_cus_t\fP *p_cus, uint8_t *pData, uint8_t length)"
+.br
+.RI "Function for updating the custom value\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This module implements a custom Button Service with an Button(Touch Switch) Characteristics\&. During initialization, the module adds the Custom Button Service and Characteristics to the BLE stack database\&. 
+
+The application must supply an event handler for receiving Custom Button Service events\&. Using this handler, the service notifies the application when the Button(touch switch) value changes\&.
+.PP
+\fBNote\fP
+.RS 4
+The application must register this module as BLE event observer using the NRF_SDH_BLE_OBSERVER macro\&. Example: 
+.PP
+.nf
+ble_cus_t instance;
+NRF_SDH_BLE_OBSERVER(anything, BLE_LBS_BLE_OBSERVER_PRIO,
+                     ble_cus_on_ble_evt, &instance);
+
+.fi
+.PP
+ 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BLE_CUS_DEF(_name)"
+
+.PP
+Macro for defining a ble_cus_service instance\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_name\fP Name of the instance\&. 
+.RE
+.PP
+
+.SS "#define CUSTOM_SERVICE_UUID   0x1400"
+
+.SS "#define CUSTOM_SERVICE_UUID_BASE"
+\fBValue:\fP
+.PP
+.nf
+                                      { 0xBC, 0x8A, 0xBF, 0x45, 0xCA, 0x05, 0x50, 0xBA, \
+                                      0x40, 0x42, 0xB0, 0x00, 0xC9, 0xAD, 0x64, 0xF3 }
+.fi
+.PP
+CUSTOM_SERVICE_UUID: f364xxxx-b000-4042-ba50-05ca45bf8abc\&. 
+.SS "#define CUSTOM_VALUE_CHAR_UUID   0x1401"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef void(* ble_cus_evt_handler_t) (\fBble_cus_t\fP *p_bas, \fBble_cus_evt_t\fP *p_evt)"
+
+.PP
+Custom Service event handler type\&. 
+.SS "typedef struct \fBble_cus_s\fP \fBble_cus_t\fP"
+
+.PP
+Forward declaration of the ble_cus_t type\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBble_cus_evt_type_t\fP"
+
+.PP
+Custom Service event type\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIBLE_CUS_EVT_NOTIFICATION_ENABLED \fP\fP
+Custom value notification enabled event\&. 
+.TP
+\fB\fIBLE_CUS_EVT_NOTIFICATION_DISABLED \fP\fP
+Custom value notification disabled event\&. 
+.SH "Function Documentation"
+.PP 
+.SS "ret_code_t ble_cus_custom_value_update (\fBble_cus_t\fP * p_cus, uint8_t * pData, uint8_t length)"
+
+.PP
+Function for updating the custom value\&. The application calls this function when the cutom value should be updated\&. If notification has been enabled, the custom value characteristic is sent to the client\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_cus\fP Switch Service structure\&. 
+.br
+\fIpData\fP Data to update 
+.br
+\fIlength\fP length of Data
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+NRF_SUCCESS on success, otherwise an error code\&. 
+.RE
+.PP
+
+.SS "uint32_t ble_cus_init (\fBble_cus_t\fP * p_cus, const \fBble_cus_init_t\fP * p_cus_init)"
+
+.PP
+Function for initializing the Custom Service\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_cus\fP Custom Service structure\&. This structure will have to be supplied by the application\&. It will be initialized by this function, and will later be used to identify this particular service instance\&. 
+.br
+\fIp_cus_init\fP Information needed to initialize the service\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+NRF_SUCCESS on successful initialization of service, otherwise an error code\&. 
+.RE
+.PP
+
+.SS "void ble_cus_on_ble_evt (ble_evt_t const * p_ble_evt, void * p_context)"
+
+.PP
+Function for handling the Application's BLE Stack events\&. Handles all events from the BLE stack of interest to the Battery Service\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_context\fP 
+.br
+\fIp_ble_evt\fP Event received from the BLE stack\&.
+.RE
+.PP
+Handles all events from the BLE stack of interest to the Battery Service\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_context\fP 
+.br
+ 
+.br
+\fIp_ble_evt\fP Event received from the BLE stack\&. 
+.RE
+.PP
+
+.SS "void ble_cus_on_gatt_evt (\fBble_cus_t\fP * p_cus, nrf_ble_gatt_evt_t const * p_gatt_evt)"
+
+.PP
+Function for handling the GATT module's events\&. Handles all events from the GATT module of interest to the Heart Rate Service\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_cus\fP Switch Service structure\&. 
+.br
+\fIp_gatt_evt\fP Event received from the GATT module\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for BLE SWITCH (REMOTE) APPLICATION from the source code\&.

@@ -1,0 +1,49 @@
+.TH "ble_cus_s" 3 "Fri Jul 24 2020" "BLE SWITCH (REMOTE) APPLICATION" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ble_cus_s \- Custom Service structure\&. This contains various status information for the service\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ble_cus_p\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint16_t \fBservice_handle\fP"
+.br
+.ti -1c
+.RI "uint16_t \fBconn_handle\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBuuid_type\fP"
+.br
+.ti -1c
+.RI "\fBble_cus_evt_handler_t\fP \fBevt_handler\fP"
+.br
+.ti -1c
+.RI "ble_gatts_char_handles_t \fBcustom_value_handles\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Custom Service structure\&. This contains various status information for the service\&. 
+.SH "Field Documentation"
+.PP 
+.SS "uint16_t conn_handle"
+Handle of Custom Service (as provided by the BLE stack)\&. 
+.SS "ble_gatts_char_handles_t custom_value_handles"
+Event handler to be called for handling events in the Custom Service\&. 
+.SS "\fBble_cus_evt_handler_t\fP evt_handler"
+UUID Type\&. 
+.SS "uint16_t service_handle"
+
+.SS "uint8_t uuid_type"
+Connection Handle (as provided by the BLE stack)\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for BLE SWITCH (REMOTE) APPLICATION from the source code\&.

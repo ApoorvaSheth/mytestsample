@@ -1,0 +1,5 @@
+<map id="on_adv_evt" name="on_adv_evt">
+<area shape="rect" id="node1" title="Function for handling advertising events." alt="" coords="259,5,344,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a935c9624de0709fe228dbefa4b54de48" title="Function for initializing the Advertising functionality." alt="" coords="104,5,211,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

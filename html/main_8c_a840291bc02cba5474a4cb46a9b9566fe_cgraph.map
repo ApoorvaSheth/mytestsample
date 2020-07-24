@@ -1,0 +1,38 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="Function for application main entry." alt="" coords="5,463,56,489"/>
+<area shape="rect" id="node2" href="$main_8c.html#a935c9624de0709fe228dbefa4b54de48" title="Function for initializing the Advertising functionality." alt="" coords="132,237,239,264"/>
+<area shape="rect" id="node5" href="$main_8c.html#a8b62a119d47b64c64f1352d118888fd3" title="Function to start advertising." alt="" coords="563,41,679,68"/>
+<area shape="rect" id="node7" href="$main_8c.html#aa06a7a39e83ec4cf3553f4ed6ba6323a" title="Function for initializing the BLE stack." alt="" coords="134,412,237,439"/>
+<area shape="rect" id="node10" href="$main_8c.html#ada967b353ba42e8061e8fdb343bf74e7" title="Function for initializing buttons and leds." alt="" coords="125,157,245,184"/>
+<area shape="rect" id="node14" href="$main_8c.html#af61b6c1c47f5c96b169ff81c345d7849" title="Function for initializing the Connection Parameters module." alt="" coords="123,463,247,489"/>
+<area shape="rect" id="node17" href="$main_8c.html#a1004973353f351806e42896c491a5ab2" title="Function for the GAP initialization." alt="" coords="127,513,244,540"/>
+<area shape="rect" id="node18" href="$main_8c.html#ab6e3836660d58a5f7e35b7d6f868a25b" title="Function for initializing the GATT module." alt="" coords="151,564,219,591"/>
+<area shape="rect" id="node20" href="$main_8c.html#aa0a6536f8bac4c47191dd5b690b80d63" title="Function for handling the idle state (main loop)." alt="" coords="124,615,247,641"/>
+<area shape="rect" id="node21" href="$main_8c.html#a9d9d9b1f30592189c3aa7358c626218f" title="Function for initializing the LED&#39;s." alt="" coords="154,665,217,692"/>
+<area shape="rect" id="node22" href="$main_8c.html#a8cbf849de9da0b561bc201d34343e63b" title="Function for initializing the nrf log module." alt="" coords="154,716,217,743"/>
+<area shape="rect" id="node23" href="$main_8c.html#a6c69f32d7006096dc75ddf2d036a91d0" title="Function for initializing peer manager." alt="" coords="121,92,249,119"/>
+<area shape="rect" id="node25" href="$main_8c.html#a637c14192da5ee544bcb1f731da1aa34" title="Function for initializing power management." alt="" coords="104,767,267,793"/>
+<area shape="rect" id="node26" href="$main_8c.html#ab2d79d012b56be0481ae5df5c0009a73" title="Read the input from TTP229 module." alt="" coords="770,361,871,388"/>
+<area shape="rect" id="node27" href="$main_8c.html#a5b27b40e18af00d43b92f57eaed0e9b2" title="Function for initializing services that will be used by the application." alt="" coords="139,817,232,844"/>
+<area shape="rect" id="node31" href="$main_8c.html#a09658aaa0774820d8f25249d551bc283" title="Function for the Timer initialization." alt="" coords="144,303,227,329"/>
+<area shape="rect" id="node3" href="$main_8c.html#a438975f6ac624c8570220ab1c842ba1e" title="Function for handling advertising events." alt="" coords="363,193,449,220"/>
+<area shape="rect" id="node4" href="$main_8c.html#abc21b53ebfc6ba20dbdf6aadcd8eb345" title="Function for putting the chip into sleep mode." alt="" coords="557,209,685,236"/>
+<area shape="rect" id="node6" href="$main_8c.html#a0705a72cb7bd7d6896f135053070963f" title="Function for deleting bonds." alt="" coords="771,67,870,93"/>
+<area shape="rect" id="node8" href="$main_8c.html#af79fad11603ce86f991e529e023dc564" title="Function for handling BLE events." alt="" coords="351,412,461,439"/>
+<area shape="rect" id="node9" href="$main_8c.html#ae9860451a7f0bb5a0d8ea770ca953f7d" title="On match request." alt="" coords="556,412,685,439"/>
+<area shape="rect" id="node11" href="$main_8c.html#a22ac6b4aa31eb37eb73d3f2a4983a121" title="Function for handling events from the BSP module." alt="" coords="341,143,471,169"/>
+<area shape="rect" id="node12" href="$main_8c.html#aca9ea6430aa06ff32c5fcd03f0433476" title="Function for handling button presses for numeric comparison match requests." alt="" coords="545,143,696,185"/>
+<area shape="rect" id="node13" href="$main_8c.html#a628d41c2513efc05efa0a526de8edc4a" title="Function to send replay with authentication Key ." alt="" coords="760,151,881,177"/>
+<area shape="rect" id="node15" href="$main_8c.html#a4538ed130db3bf7fc68b76a4d9e032fa" title="Function for handling a Connection Parameters error." alt="" coords="315,463,497,489"/>
+<area shape="rect" id="node16" href="$main_8c.html#a3518a4402961dbde9a52c7de6211ad7a" title="Function for handling the Connection Parameters Module." alt="" coords="334,513,478,540"/>
+<area shape="rect" id="node19" href="$main_8c.html#add0e1c95a5d241fbc07f6b41150a1a23" title="GATT module event handler." alt="" coords="348,564,464,591"/>
+<area shape="rect" id="node24" href="$main_8c.html#a3d7c0b9bfadfcd49fbefeaa55c6e7012" title="Event Handling function for peer manager." alt="" coords="350,92,462,119"/>
+<area shape="rect" id="node28" href="$ble__cus__p_8c.html#ac134a6d9efef56348e7d311944da228a" title="Function for initializing the Custom Service." alt="" coords="361,817,451,844"/>
+<area shape="rect" id="node29" href="$main_8c.html#a8a729b18f645c840f2fc8a681002f094" title="Function for handling Queued Write Module errors." alt="" coords="333,868,479,895"/>
+<area shape="rect" id="node30" href="$main_8c.html#ad08e0b756468abd7617061d8e7512e3b" title="Callback function for custom switch service." alt="" coords="363,767,449,793"/>
+<area shape="rect" id="node32" href="$main_8c.html#a32bd14eb8abab2a4d10abce247ea4a69" title="Callback function for Notification app_timer." alt="" coords="329,295,483,337"/>
+<area shape="rect" id="node36" href="$main_8c.html#a2e894d5ec31e8a0bf3c5a97dbdc7909a" title="Callback function for disconnection app_timer." alt="" coords="349,244,463,271"/>
+<area shape="rect" id="node33" href="$main_8c.html#a8bb16472c3fff64faa89d16320bf9051" title="Command format to send to Blackbox." alt="" coords="551,303,691,329"/>
+<area shape="rect" id="node34" href="$ble__cus__p_8c.html#a16dafdebc2ef31ef53f2554bf75a23f7" title="Function for updating the custom value." alt="" coords="744,295,897,337"/>
+<area shape="rect" id="node35" href="$main_8c.html#a14dac6bb8a1be2aba90efc22f71e6407" title="Reset the LED Timer." alt="" coords="765,244,876,271"/>
+</map>

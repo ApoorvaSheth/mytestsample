@@ -1,0 +1,5 @@
+<map id="pm_evt_handler" name="pm_evt_handler">
+<area shape="rect" id="node1" title="Event Handling function for peer manager." alt="" coords="5,5,117,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a8b62a119d47b64c64f1352d118888fd3" title="Function to start advertising." alt="" coords="165,5,281,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0705a72cb7bd7d6896f135053070963f" title="Function for deleting bonds." alt="" coords="329,5,428,32"/>
+</map>

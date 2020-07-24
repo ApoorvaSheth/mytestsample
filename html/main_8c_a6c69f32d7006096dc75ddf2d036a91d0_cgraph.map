@@ -1,0 +1,6 @@
+<map id="peer_manager_init" name="peer_manager_init">
+<area shape="rect" id="node1" title="Function for initializing peer manager." alt="" coords="5,5,133,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a3d7c0b9bfadfcd49fbefeaa55c6e7012" title="Event Handling function for peer manager." alt="" coords="181,5,293,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a8b62a119d47b64c64f1352d118888fd3" title="Function to start advertising." alt="" coords="341,5,457,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0705a72cb7bd7d6896f135053070963f" title="Function for deleting bonds." alt="" coords="505,5,604,32"/>
+</map>

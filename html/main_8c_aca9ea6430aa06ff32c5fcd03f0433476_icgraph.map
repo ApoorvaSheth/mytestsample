@@ -1,0 +1,6 @@
+<map id="on_num_comp_button_press" name="on_num_comp_button_press">
+<area shape="rect" id="node1" title="Function for handling button presses for numeric comparison match requests." alt="" coords="449,5,600,47"/>
+<area shape="rect" id="node2" href="$main_8c.html#a22ac6b4aa31eb37eb73d3f2a4983a121" title="Function for handling events from the BSP module." alt="" coords="272,13,401,39"/>
+<area shape="rect" id="node3" href="$main_8c.html#ada967b353ba42e8061e8fdb343bf74e7" title="Function for initializing buttons and leds." alt="" coords="104,13,224,39"/>
+<area shape="rect" id="node4" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,13,56,39"/>
+</map>

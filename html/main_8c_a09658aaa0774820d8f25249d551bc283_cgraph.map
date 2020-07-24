@@ -1,0 +1,10 @@
+<map id="timers_init" name="timers_init">
+<area shape="rect" id="node1" title="Function for the Timer initialization." alt="" coords="5,101,88,127"/>
+<area shape="rect" id="node2" href="$main_8c.html#a32bd14eb8abab2a4d10abce247ea4a69" title="Callback function for Notification app_timer." alt="" coords="136,64,291,105"/>
+<area shape="rect" id="node7" href="$main_8c.html#a2e894d5ec31e8a0bf3c5a97dbdc7909a" title="Callback function for disconnection app_timer." alt="" coords="156,130,271,157"/>
+<area shape="rect" id="node3" href="$main_8c.html#a8bb16472c3fff64faa89d16320bf9051" title="Command format to send to Blackbox." alt="" coords="339,71,479,98"/>
+<area shape="rect" id="node4" href="$ble__cus__p_8c.html#a16dafdebc2ef31ef53f2554bf75a23f7" title="Function for updating the custom value." alt="" coords="527,5,680,47"/>
+<area shape="rect" id="node5" href="$main_8c.html#ab2d79d012b56be0481ae5df5c0009a73" title="Read the input from TTP229 module." alt="" coords="553,71,654,98"/>
+<area shape="rect" id="node6" href="$main_8c.html#a14dac6bb8a1be2aba90efc22f71e6407" title="Reset the LED Timer." alt="" coords="548,122,659,149"/>
+<area shape="rect" id="node8" href="$main_8c.html#abc21b53ebfc6ba20dbdf6aadcd8eb345" title="Function for putting the chip into sleep mode." alt="" coords="345,130,473,157"/>
+</map>

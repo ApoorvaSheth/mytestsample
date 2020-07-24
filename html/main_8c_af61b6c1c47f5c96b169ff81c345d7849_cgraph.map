@@ -1,0 +1,5 @@
+<map id="conn_params_init" name="conn_params_init">
+<area shape="rect" id="node1" title="Function for initializing the Connection Parameters module." alt="" coords="5,31,129,57"/>
+<area shape="rect" id="node2" href="$main_8c.html#a4538ed130db3bf7fc68b76a4d9e032fa" title="Function for handling a Connection Parameters error." alt="" coords="177,5,360,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a3518a4402961dbde9a52c7de6211ad7a" title="Function for handling the Connection Parameters Module." alt="" coords="197,56,341,83"/>
+</map>

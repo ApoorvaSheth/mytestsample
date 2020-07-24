@@ -1,0 +1,5 @@
+<map id="gatt_evt_handler" name="gatt_evt_handler">
+<area shape="rect" id="node1" title="GATT module event handler." alt="" coords="220,5,336,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#ab6e3836660d58a5f7e35b7d6f868a25b" title="Function for initializing the GATT module." alt="" coords="104,5,172,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="Function for application main entry." alt="" coords="5,5,56,32"/>
+</map>

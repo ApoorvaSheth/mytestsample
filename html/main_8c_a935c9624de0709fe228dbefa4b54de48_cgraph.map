@@ -1,0 +1,5 @@
+<map id="advertising_init" name="advertising_init">
+<area shape="rect" id="node1" title="Function for initializing the Advertising functionality." alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node2" href="$main_8c.html#a438975f6ac624c8570220ab1c842ba1e" title="Function for handling advertising events." alt="" coords="160,5,245,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#abc21b53ebfc6ba20dbdf6aadcd8eb345" title="Function for putting the chip into sleep mode." alt="" coords="293,5,421,32"/>
+</map>

@@ -1,0 +1,856 @@
+.TH "main.c" 3 "Fri Jul 24 2020" "BLE SWITCH (REMOTE) APPLICATION" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+main.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'app_error\&.h'\fP
+.br
+\fC#include 'app_timer\&.h'\fP
+.br
+\fC#include 'ble\&.h'\fP
+.br
+\fC#include 'ble_advdata\&.h'\fP
+.br
+\fC#include 'ble_advertising\&.h'\fP
+.br
+\fC#include 'ble_conn_params\&.h'\fP
+.br
+\fC#include 'ble_conn_state\&.h'\fP
+.br
+\fC#include 'ble_err\&.h'\fP
+.br
+\fC#include 'ble_srv_common\&.h'\fP
+.br
+\fC#include 'bsp_btn_ble\&.h'\fP
+.br
+\fC#include 'fds\&.h'\fP
+.br
+\fC#include 'nordic_common\&.h'\fP
+.br
+\fC#include 'nrf\&.h'\fP
+.br
+\fC#include 'nrf_ble_gatt\&.h'\fP
+.br
+\fC#include 'nrf_ble_lesc\&.h'\fP
+.br
+\fC#include 'nrf_ble_qwr\&.h'\fP
+.br
+\fC#include 'nrf_delay\&.h'\fP
+.br
+\fC#include 'nrf_pwr_mgmt\&.h'\fP
+.br
+\fC#include 'nrf_sdh\&.h'\fP
+.br
+\fC#include 'nrf_sdh_ble\&.h'\fP
+.br
+\fC#include 'nrf_sdh_soc\&.h'\fP
+.br
+\fC#include 'nrf_sdm\&.h'\fP
+.br
+\fC#include 'peer_manager\&.h'\fP
+.br
+\fC#include 'peer_manager_handler\&.h'\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'custom_service/ble_cus_p\&.h'\fP
+.br
+\fC#include 'nrf_log\&.h'\fP
+.br
+\fC#include 'nrf_log_ctrl\&.h'\fP
+.br
+\fC#include 'nrf_log_default_backends\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBADVERTISING_LED\fP   BSP_BOARD_LED_3"
+.br
+.RI "BLUE LED is on when device is advertising\&. "
+.ti -1c
+.RI "#define \fBCONNECTED_LED\fP   BSP_BOARD_LED_1"
+.br
+.RI "RED LED is on when device is advertising\&. "
+.ti -1c
+.RI "#define \fBBONDED_LED\fP   BSP_BOARD_LED_0"
+.br
+.RI "GREEN LED is on when device is advertising\&. "
+.ti -1c
+.RI "#define \fBDEVICE_NAME\fP   'TTP229'"
+.br
+.RI "Device Name display while advertising\&. "
+.ti -1c
+.RI "#define \fBMANUFACTURER_NAME\fP   'NordicSemiconductor'"
+.br
+.ti -1c
+.RI "#define \fBAPP_ADV_INTERVAL\fP   64"
+.br
+.RI "advertising interval (in units of 0\&.625 ms\&. value corresponds to 40 ms)\&. "
+.ti -1c
+.RI "#define \fBAPP_ADV_DURATION\fP   6000"
+.br
+.RI "The advertising duration (60 seconds) in units of 10 milliseconds\&. "
+.ti -1c
+.RI "#define \fBAPP_BLE_CONN_CFG_TAG\fP   1"
+.br
+.RI "A tag identifying the SoftDevice BLE configuration\&. "
+.ti -1c
+.RI "#define \fBAPP_BLE_OBSERVER_PRIO\fP   3"
+.br
+.RI "Application's BLE observer priority\&. You shouldn't need to modify this value\&. "
+.ti -1c
+.RI "#define \fBCUSTOM_LEVEL_MEAS_INTERVAL\fP   APP_TIMER_TICKS (300)"
+.br
+.RI "Interval between data update\&. "
+.ti -1c
+.RI "#define \fBMIN_CONN_INTERVAL\fP   MSEC_TO_UNITS (400, UNIT_1_25_MS)"
+.br
+.RI "Minimum acceptable connection interval (0\&.4 sec)\&. "
+.ti -1c
+.RI "#define \fBMAX_CONN_INTERVAL\fP   MSEC_TO_UNITS (650, UNIT_1_25_MS)"
+.br
+.RI "Maximum acceptable connection interval (0\&.65 sec)\&. "
+.ti -1c
+.RI "#define \fBSLAVE_LATENCY\fP   0"
+.br
+.RI "Slave latency\&. "
+.ti -1c
+.RI "#define \fBCONN_SUP_TIMEOUT\fP   MSEC_TO_UNITS (4000, UNIT_10_MS)"
+.br
+.RI "Connection supervisory timeout (4 seconds)\&. "
+.ti -1c
+.RI "#define \fBFIRST_CONN_PARAMS_UPDATE_DELAY\fP   APP_TIMER_TICKS (5000)"
+.br
+.RI "Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (5 seconds)\&. "
+.ti -1c
+.RI "#define \fBNEXT_CONN_PARAMS_UPDATE_DELAY\fP   APP_TIMER_TICKS (30000)"
+.br
+.RI "Time between each call to sd_ble_gap_conn_param_update after the first call (30 seconds)\&. "
+.ti -1c
+.RI "#define \fBMAX_CONN_PARAMS_UPDATE_COUNT\fP   3"
+.br
+.RI "Number of attempts before giving up the connection parameter negotiation\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_BOND\fP   1"
+.br
+.RI "Perform Bonding\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_MITM\fP   1"
+.br
+.RI "Man In Middle Protection not required\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_LESC\fP   1"
+.br
+.RI "LE Secure Connections enabled\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_KEYPRESS\fP   0"
+.br
+.RI "Keypress notifications not enabled\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_IO_CAPABILITIES\fP   BLE_GAP_IO_CAPS_DISPLAY_YESNO"
+.br
+.RI "No I/O capabilities\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_OOB\fP   0"
+.br
+.RI "Out of Bond data not available\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_MIN_KEY_SIZE\fP   7"
+.br
+.RI "Minimum encryption key size in octets\&. "
+.ti -1c
+.RI "#define \fBSEC_PARAM_MAX_KEY_SIZE\fP   16"
+.br
+.RI "Maximum encryption key size in octets\&. "
+.ti -1c
+.RI "#define \fBDEAD_BEEF\fP   0xDEADBEEF"
+.br
+.ti -1c
+.RI "#define \fBTTP229_SCL\fP   NRF_GPIO_PIN_MAP (0, 31)"
+.br
+.RI "TTP229_SCP MAP TO GPIO 31\&. "
+.ti -1c
+.RI "#define \fBTTP229_SDO\fP   NRF_GPIO_PIN_MAP (0, 29)"
+.br
+.RI "TTP229_SDO MAP TO GPIO 29\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNRF_BLE_GATT_DEF\fP (m_gatt)"
+.br
+.RI "GATT module instance\&. "
+.ti -1c
+.RI "\fBNRF_BLE_QWR_DEF\fP (m_qwr)"
+.br
+.RI "Context for the Queued Write module\&. "
+.ti -1c
+.RI "\fBBLE_ADVERTISING_DEF\fP (m_advertising)"
+.br
+.RI "Advertising module instance\&. "
+.ti -1c
+.RI "\fBBLE_CUS_DEF\fP (m_cus)"
+.br
+.ti -1c
+.RI "\fBAPP_TIMER_DEF\fP (m_cus_timer_id)"
+.br
+.RI "Timer to send notification\&. "
+.ti -1c
+.RI "\fBAPP_TIMER_DEF\fP (m_timeout_timer_id)"
+.br
+.RI "Timer to disconnect peripheral from central\&. "
+.ti -1c
+.RI "void \fBreset_led_timer\fP (void)"
+.br
+.RI "Reset the LED Timer\&. "
+.ti -1c
+.RI "void \fBassert_nrf_callback\fP (uint16_t line_num, const uint8_t *p_file_name)"
+.br
+.RI "Callback function for asserts in the SoftDevice\&. "
+.ti -1c
+.RI "static void \fBdelete_bonds\fP (void)"
+.br
+.RI "Function for deleting bonds\&. "
+.ti -1c
+.RI "static void \fBnum_comp_reply\fP (uint16_t conn_handle, bool accept)"
+.br
+.RI "Function to send replay with authentication Key \&. "
+.ti -1c
+.RI "static void \fBon_num_comp_button_press\fP (bool accept)"
+.br
+.RI "Function for handling button presses for numeric comparison match requests\&. "
+.ti -1c
+.RI "void \fBadvertising_start\fP (bool erase_bonds)"
+.br
+.RI "Function to start advertising\&. "
+.ti -1c
+.RI "static void \fBpm_evt_handler\fP (pm_evt_t const *p_evt)"
+.br
+.RI "Event Handling function for peer manager\&. "
+.ti -1c
+.RI "static void \fBsleep_mode_enter\fP (void)"
+.br
+.RI "Function for putting the chip into sleep mode\&. "
+.ti -1c
+.RI "uint16_t \fBRead_keypad\fP ()"
+.br
+.RI "Read the input from TTP229 module\&. "
+.ti -1c
+.RI "static void \fBttp229_value_update\fP (void)"
+.br
+.RI "Command format to send to Blackbox\&. "
+.ti -1c
+.RI "static void \fBcustom_meas_timeout_handler\fP (void *p_context)"
+.br
+.RI "Callback function for Notification app_timer\&. "
+.ti -1c
+.RI "static void \fBtimeout_handler\fP (void *p_context)"
+.br
+.RI "Callback function for disconnection app_timer\&. "
+.ti -1c
+.RI "static void \fBtimers_init\fP (void)"
+.br
+.RI "Function for the Timer initialization\&. "
+.ti -1c
+.RI "static void \fBgap_params_init\fP (void)"
+.br
+.RI "Function for the GAP initialization\&. "
+.ti -1c
+.RI "static void \fBgatt_evt_handler\fP (nrf_ble_gatt_t *p_gatt, nrf_ble_gatt_evt_t const *p_evt)"
+.br
+.RI "GATT module event handler\&. "
+.ti -1c
+.RI "static void \fBgatt_init\fP (void)"
+.br
+.RI "Function for initializing the GATT module\&. "
+.ti -1c
+.RI "static void \fBnrf_qwr_error_handler\fP (uint32_t nrf_error)"
+.br
+.RI "Function for handling Queued Write Module errors\&. "
+.ti -1c
+.RI "static void \fBon_cus_evt\fP (\fBble_cus_t\fP *p_cus_service, \fBble_cus_evt_t\fP *p_evt)"
+.br
+.RI "Callback function for custom switch service\&. "
+.ti -1c
+.RI "static void \fBservices_init\fP (void)"
+.br
+.RI "Function for initializing services that will be used by the application\&. "
+.ti -1c
+.RI "static void \fBon_conn_params_evt\fP (ble_conn_params_evt_t *p_evt)"
+.br
+.RI "Function for handling the Connection Parameters Module\&. "
+.ti -1c
+.RI "static void \fBconn_params_error_handler\fP (uint32_t nrf_error)"
+.br
+.RI "Function for handling a Connection Parameters error\&. "
+.ti -1c
+.RI "static void \fBconn_params_init\fP (void)"
+.br
+.RI "Function for initializing the Connection Parameters module\&. "
+.ti -1c
+.RI "static void \fBon_adv_evt\fP (ble_adv_evt_t ble_adv_evt)"
+.br
+.RI "Function for handling advertising events\&. "
+.ti -1c
+.RI "static void \fBon_match_request\fP (uint16_t conn_handle, uint8_t role)"
+.br
+.RI "On match request\&. "
+.ti -1c
+.RI "static void \fBble_evt_handler\fP (ble_evt_t const *p_ble_evt, void *p_context)"
+.br
+.RI "Function for handling BLE events\&. "
+.ti -1c
+.RI "static void \fBble_stack_init\fP (void)"
+.br
+.RI "Function for initializing the BLE stack\&. "
+.ti -1c
+.RI "void \fBbsp_event_handler\fP (bsp_event_t event)"
+.br
+.RI "Function for handling events from the BSP module\&. "
+.ti -1c
+.RI "static void \fBpeer_manager_init\fP (void)"
+.br
+.RI "Function for initializing peer manager\&. "
+.ti -1c
+.RI "static void \fBadvertising_init\fP (void)"
+.br
+.RI "Function for initializing the Advertising functionality\&. "
+.ti -1c
+.RI "static void \fBbuttons_leds_init\fP (bool *p_erase_bonds)"
+.br
+.RI "Function for initializing buttons and leds\&. "
+.ti -1c
+.RI "static void \fBled_init\fP (void)"
+.br
+.RI "Function for initializing the LED's\&. "
+.ti -1c
+.RI "static void \fBlog_init\fP (void)"
+.br
+.RI "Function for initializing the nrf log module\&. "
+.ti -1c
+.RI "static void \fBpower_management_init\fP (void)"
+.br
+.RI "Function for initializing power management\&. "
+.ti -1c
+.RI "static void \fBidle_state_handle\fP (void)"
+.br
+.RI "Function for handling the idle state (main loop)\&. "
+.ti -1c
+.RI "int \fBmain\fP (void)"
+.br
+.RI "Function for application main entry\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static uint16_t \fBm_conn_handle\fP = BLE_CONN_HANDLE_INVALID"
+.br
+.RI "Handle of the current connection\&. "
+.ti -1c
+.RI "static volatile uint16_t \fBm_conn_handle_num_comp_central\fP = BLE_CONN_HANDLE_INVALID"
+.br
+.RI "Connection handle for the central that needs a numeric comparison button press\&. "
+.ti -1c
+.RI "static volatile uint16_t \fBm_conn_handle_num_comp_peripheral\fP = BLE_CONN_HANDLE_INVALID"
+.br
+.RI "Connection handle for the peripheral that needs a numeric comparison button press\&. "
+.ti -1c
+.RI "static ble_uuid_t \fBm_adv_uuids\fP [] = {{\fBCUSTOM_SERVICE_UUID\fP, BLE_UUID_TYPE_VENDOR_BEGIN}}"
+.br
+.RI "Universally unique service identifiers\&. "
+.ti -1c
+.RI "volatile uint16_t \fBwhichKey\fP = 0"
+.br
+.RI "Variable to store key value\&. "
+.ti -1c
+.RI "static uint8_t \fBm_adv_handle\fP = BLE_GAP_ADV_SET_HANDLE_NOT_SET"
+.br
+.RI "Advertising handle used to identify an advertising set\&. "
+.ti -1c
+.RI "static volatile uint8_t \fBpeer_bonded\fP = false"
+.br
+.RI "If true then delete bond information\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ADVERTISING_LED   BSP_BOARD_LED_3"
+
+.PP
+BLUE LED is on when device is advertising\&. 
+.SS "#define APP_ADV_DURATION   6000"
+
+.PP
+The advertising duration (60 seconds) in units of 10 milliseconds\&. 
+.SS "#define APP_ADV_INTERVAL   64"
+
+.PP
+advertising interval (in units of 0\&.625 ms\&. value corresponds to 40 ms)\&. 
+.SS "#define APP_BLE_CONN_CFG_TAG   1"
+
+.PP
+A tag identifying the SoftDevice BLE configuration\&. 
+.SS "#define APP_BLE_OBSERVER_PRIO   3"
+
+.PP
+Application's BLE observer priority\&. You shouldn't need to modify this value\&. 
+.SS "#define BONDED_LED   BSP_BOARD_LED_0"
+
+.PP
+GREEN LED is on when device is advertising\&. 
+.SS "#define CONN_SUP_TIMEOUT   MSEC_TO_UNITS (4000, UNIT_10_MS)"
+
+.PP
+Connection supervisory timeout (4 seconds)\&. 
+.SS "#define CONNECTED_LED   BSP_BOARD_LED_1"
+
+.PP
+RED LED is on when device is advertising\&. 
+.SS "#define CUSTOM_LEVEL_MEAS_INTERVAL   APP_TIMER_TICKS (300)"
+
+.PP
+Interval between data update\&. 
+.SS "#define DEAD_BEEF   0xDEADBEEF"
+
+.SS "#define DEVICE_NAME   'TTP229'"
+
+.PP
+Device Name display while advertising\&. 
+.SS "#define FIRST_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS (5000)"
+
+.PP
+Time from initiating event (connect or start of notification) to first time sd_ble_gap_conn_param_update is called (5 seconds)\&. 
+.SS "#define MANUFACTURER_NAME   'NordicSemiconductor'"
+
+.SS "#define MAX_CONN_INTERVAL   MSEC_TO_UNITS (650, UNIT_1_25_MS)"
+
+.PP
+Maximum acceptable connection interval (0\&.65 sec)\&. 
+.SS "#define MAX_CONN_PARAMS_UPDATE_COUNT   3"
+
+.PP
+Number of attempts before giving up the connection parameter negotiation\&. 
+.SS "#define MIN_CONN_INTERVAL   MSEC_TO_UNITS (400, UNIT_1_25_MS)"
+
+.PP
+Minimum acceptable connection interval (0\&.4 sec)\&. 
+.SS "#define NEXT_CONN_PARAMS_UPDATE_DELAY   APP_TIMER_TICKS (30000)"
+
+.PP
+Time between each call to sd_ble_gap_conn_param_update after the first call (30 seconds)\&. 
+.SS "#define SEC_PARAM_BOND   1"
+
+.PP
+Perform Bonding\&. 
+.SS "#define SEC_PARAM_IO_CAPABILITIES   BLE_GAP_IO_CAPS_DISPLAY_YESNO"
+
+.PP
+No I/O capabilities\&. 
+.SS "#define SEC_PARAM_KEYPRESS   0"
+
+.PP
+Keypress notifications not enabled\&. 
+.SS "#define SEC_PARAM_LESC   1"
+
+.PP
+LE Secure Connections enabled\&. 
+.SS "#define SEC_PARAM_MAX_KEY_SIZE   16"
+
+.PP
+Maximum encryption key size in octets\&. 
+.SS "#define SEC_PARAM_MIN_KEY_SIZE   7"
+
+.PP
+Minimum encryption key size in octets\&. 
+.SS "#define SEC_PARAM_MITM   1"
+
+.PP
+Man In Middle Protection not required\&. 
+.SS "#define SEC_PARAM_OOB   0"
+
+.PP
+Out of Bond data not available\&. 
+.SS "#define SLAVE_LATENCY   0"
+
+.PP
+Slave latency\&. 
+.SS "#define TTP229_SCL   NRF_GPIO_PIN_MAP (0, 31)"
+
+.PP
+TTP229_SCP MAP TO GPIO 31\&. 
+.SS "#define TTP229_SDO   NRF_GPIO_PIN_MAP (0, 29)"
+
+.PP
+TTP229_SDO MAP TO GPIO 29\&. 
+.SH "Function Documentation"
+.PP 
+.SS "static void advertising_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the Advertising functionality\&. 
+.SS "void advertising_start (bool erase_bonds)"
+
+.PP
+Function to start advertising\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIerase_bonds\fP Flag to delete bonds\&. 
+.RE
+.PP
+
+.SS "APP_TIMER_DEF (m_cus_timer_id)"
+
+.PP
+Timer to send notification\&. 
+.SS "APP_TIMER_DEF (m_timeout_timer_id)"
+
+.PP
+Timer to disconnect peripheral from central\&. 
+.SS "void assert_nrf_callback (uint16_t line_num, const uint8_t * p_file_name)"
+
+.PP
+Callback function for asserts in the SoftDevice\&. This function will be called in case of an assert in the SoftDevice\&.
+.PP
+\fBWarning\fP
+.RS 4
+This handler is an example only and does not fit a final product\&. You need to analyze how your product is supposed to react in case of Assert\&. 
+.PP
+On assert from the SoftDevice, the system can only recover on reset\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIline_num\fP Line number of the failing ASSERT call\&. 
+.br
+\fIp_file_name\fP File name of the failing ASSERT call\&. 
+.RE
+.PP
+
+.SS "BLE_ADVERTISING_DEF (m_advertising)"
+
+.PP
+Advertising module instance\&. 
+.SS "BLE_CUS_DEF (m_cus)"
+
+.SS "static void ble_evt_handler (ble_evt_t const * p_ble_evt, void * p_context)\fC [static]\fP"
+
+.PP
+Function for handling BLE events\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_ble_evt\fP Bluetooth stack event\&. 
+.br
+\fIp_context\fP Unused\&. 
+.RE
+.PP
+
+.SS "static void ble_stack_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the BLE stack\&. Initializes the SoftDevice and the BLE event interrupt\&. 
+.SS "void bsp_event_handler (bsp_event_t event)"
+
+.PP
+Function for handling events from the BSP module\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIevent\fP Event generated by button press\&. 
+.RE
+.PP
+
+.SS "static void buttons_leds_init (bool * p_erase_bonds)\fC [static]\fP"
+
+.PP
+Function for initializing buttons and leds\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_erase_bonds\fP Will be true if the clear bonding button was pressed to wake the application up\&. 
+.RE
+.PP
+
+.SS "static void conn_params_error_handler (uint32_t nrf_error)\fC [static]\fP"
+
+.PP
+Function for handling a Connection Parameters error\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInrf_error\fP Error code containing information about what went wrong\&. 
+.RE
+.PP
+
+.SS "static void conn_params_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the Connection Parameters module\&. 
+.SS "static void custom_meas_timeout_handler (void * p_context)\fC [static]\fP"
+
+.PP
+Callback function for Notification app_timer\&. Function to call update notification value 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_context\fP 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function will not return\&. 
+.RE
+.PP
+
+.SS "static void delete_bonds (void)\fC [static]\fP"
+
+.PP
+Function for deleting bonds\&. This function will be called if erase_bonds flag is true\&. 
+.SS "static void gap_params_init (void)\fC [static]\fP"
+
+.PP
+Function for the GAP initialization\&. This function sets up all the necessary GAP (Generic Access Profile) parameters of the device including the device name, appearance, and the preferred connection parameters\&. 
+.SS "static void gatt_evt_handler (nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)\fC [static]\fP"
+
+.PP
+GATT module event handler\&. 
+.SS "static void gatt_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the GATT module\&. 
+.SS "static void idle_state_handle (void)\fC [static]\fP"
+
+.PP
+Function for handling the idle state (main loop)\&. If there is no pending log operation, then sleep until next the next event occurs\&. 
+.SS "static void led_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the LED's\&. 
+.SS "static void log_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing the nrf log module\&. 
+.SS "int main (void)"
+
+.PP
+Function for application main entry\&. 
+.SS "NRF_BLE_GATT_DEF (m_gatt)"
+
+.PP
+GATT module instance\&. 
+.SS "NRF_BLE_QWR_DEF (m_qwr)"
+
+.PP
+Context for the Queued Write module\&. 
+.SS "static void nrf_qwr_error_handler (uint32_t nrf_error)\fC [static]\fP"
+
+.PP
+Function for handling Queued Write Module errors\&. A pointer to this function will be passed to each service which may need to inform the application about an error\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInrf_error\fP Error code containing information about what went wrong\&. 
+.RE
+.PP
+
+.SS "static void num_comp_reply (uint16_t conn_handle, bool accept)\fC [static]\fP"
+
+.PP
+Function to send replay with authentication Key \&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIconn_handle\fP Connection Handle\&. 
+.br
+\fIaccept\fP Flag to accept pairing/bonding request\&. 
+.RE
+.PP
+
+.SS "static void on_adv_evt (ble_adv_evt_t ble_adv_evt)\fC [static]\fP"
+
+.PP
+Function for handling advertising events\&. This function will be called for advertising events which are passed to the application\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIble_adv_evt\fP Advertising event\&. 
+.RE
+.PP
+
+.SS "static void on_conn_params_evt (ble_conn_params_evt_t * p_evt)\fC [static]\fP"
+
+.PP
+Function for handling the Connection Parameters Module\&. This function will be called for all events in the Connection Parameters Module which are passed to the application\&. 
+.PP
+\fBNote\fP
+.RS 4
+All this function does is to disconnect\&. This could have been done by simply setting the disconnect_on_fail config parameter, but instead we use the event handler mechanism to demonstrate its use\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_evt\fP Event received from the Connection Parameters Module\&. 
+.RE
+.PP
+
+.SS "static void on_cus_evt (\fBble_cus_t\fP * p_cus_service, \fBble_cus_evt_t\fP * p_evt)\fC [static]\fP"
+
+.PP
+Callback function for custom switch service\&. Function to handle switch service Events 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_cus_service\fP Status info of service 
+.br
+\fIp_evt\fP event type 
+.RE
+.PP
+
+.SS "static void on_match_request (uint16_t conn_handle, uint8_t role)\fC [static]\fP"
+
+.PP
+On match request\&. This function will be called after match request received at passkey display Event\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconn_handle\fP Connection Handle 
+.br
+\fIrole\fP BLE GAP Role 
+.RE
+.PP
+
+.SS "static void on_num_comp_button_press (bool accept)\fC [static]\fP"
+
+.PP
+Function for handling button presses for numeric comparison match requests\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaccept\fP Flag to accept pairing/bonding request\&. 
+.RE
+.PP
+
+.SS "static void peer_manager_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing peer manager\&. 
+.SS "static void pm_evt_handler (pm_evt_t const * p_evt)\fC [static]\fP"
+
+.PP
+Event Handling function for peer manager\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_evt\fP An event from the \fBpeer_manager\fP module\&. 
+.RE
+.PP
+
+.SS "static void power_management_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing power management\&. 
+.SS "uint16_t Read_keypad ()"
+
+.PP
+Read the input from TTP229 module\&. 
+.SS "void reset_led_timer (void)"
+
+.PP
+Reset the LED Timer\&. Function to reset the disconnection timeout to 30 sec\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function will not return\&. 
+.RE
+.PP
+
+.SS "static void services_init (void)\fC [static]\fP"
+
+.PP
+Function for initializing services that will be used by the application\&. Initialize the Switch Service\&. 
+.SS "static void sleep_mode_enter (void)\fC [static]\fP"
+
+.PP
+Function for putting the chip into sleep mode\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function will not return\&. 
+.RE
+.PP
+
+.SS "static void timeout_handler (void * p_context)\fC [static]\fP"
+
+.PP
+Callback function for disconnection app_timer\&. Function to disconnect from blackbox and Enter into sleep Mode 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp_context\fP 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function will not return\&. 
+.RE
+.PP
+
+.SS "static void timers_init (void)\fC [static]\fP"
+
+.PP
+Function for the Timer initialization\&. Initializes the timer module\&. This creates and starts application timers\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function will not return\&. 
+.RE
+.PP
+
+.SS "static void ttp229_value_update (void)\fC [static]\fP"
+
+.PP
+Command format to send to Blackbox\&. This function update the notification value
+.PP
+BLACKBOX SWITCHID TOUCHPOINTID  B(N) S(N) T(N)  
+.SH "Variable Documentation"
+.PP 
+.SS "uint8_t m_adv_handle = BLE_GAP_ADV_SET_HANDLE_NOT_SET\fC [static]\fP"
+
+.PP
+Advertising handle used to identify an advertising set\&. 
+.SS "ble_uuid_t m_adv_uuids[] = {{\fBCUSTOM_SERVICE_UUID\fP, BLE_UUID_TYPE_VENDOR_BEGIN}}\fC [static]\fP"
+
+.PP
+Universally unique service identifiers\&. 
+.SS "uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID\fC [static]\fP"
+
+.PP
+Handle of the current connection\&. 
+.SS "volatile uint16_t m_conn_handle_num_comp_central = BLE_CONN_HANDLE_INVALID\fC [static]\fP"
+
+.PP
+Connection handle for the central that needs a numeric comparison button press\&. 
+.SS "volatile uint16_t m_conn_handle_num_comp_peripheral = BLE_CONN_HANDLE_INVALID\fC [static]\fP"
+
+.PP
+Connection handle for the peripheral that needs a numeric comparison button press\&. 
+.SS "volatile uint8_t peer_bonded = false\fC [static]\fP"
+
+.PP
+If true then delete bond information\&. 
+.SS "volatile uint16_t whichKey = 0"
+
+.PP
+Variable to store key value\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for BLE SWITCH (REMOTE) APPLICATION from the source code\&.
